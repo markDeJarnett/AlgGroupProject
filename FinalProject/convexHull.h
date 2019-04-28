@@ -387,6 +387,76 @@ vector<point> divideAndConquerConvexHull(SDL_Plotter &g, vector<point> setOfPoin
 
 }
 
+vector<point> bruteForceConvexHull(SDL_Plotter &g, vector<point> setOfPoints) {
+    vector<point> convexHull;
+    point currentPoint;
+    point nextPoint;
+    point previousPoint = point(-1,-1);
+    line l;
+    bool isEdge = false;
+    int num;
+    int countL,
+        countR;
+
+    g.clear();
+    plotPoints(g, setOfPoints);
+    g.update();
+    g.Sleep(300);
+
+    sort(setOfPoints.begin(), setOfPoints.end(), compareXValues);
+    point topMost = setOfPoints[0];
+    point bottomMost = setOfPoints[setOfPoints.size()-1];
+
+    sort(setOfPoints.begin(), setOfPoints.end(), compareXValues);
+
+    convexHull.push_back(setOfPoints[0]);
+    currentPoint = setOfPoints[0];
+
+    do {
+        for (int i = 0; i < setOfPoints.size() && !isEdge; i++) {
+            isEdge = false;
+            if (!(currentPoint.getY() == setOfPoints[i].getY() && currentPoint.getX() == setOfPoints[i].getX())
+                    && !(previousPoint.getY() == setOfPoints[i].getY() && previousPoint.getX() == setOfPoints[i].getX())) {
+                l = line(currentPoint, setOfPoints[i]);
+
+                g.clear();
+                plotPoints(g, setOfPoints);
+                l.draw(g);
+                g.update();
+                //g.Sleep(300);
+
+                countL = countR = 0;
+                for (int j = 0; j < setOfPoints.size(); j++) {
+                    num = (setOfPoints[j].getX() - l.getP1().getX())
+                            * (l.getP2().getY() - l.getP1().getY())
+                            - (setOfPoints[j].getY() - l.getP1().getY())
+                            * (l.getP2().getX() - l.getP1().getX());
+
+                    if (num >= 0) {
+                        countL++;
+                    }
+                    if (num <= 0) {
+                        countR++;
+                    }
+                }
+
+                if (countL == setOfPoints.size() || countR == setOfPoints.size()) {
+                    nextPoint = setOfPoints[i];
+                    isEdge = true;
+                }
+            }
+        }
+
+        isEdge = false;
+        convexHull.push_back(currentPoint);
+        previousPoint = currentPoint;
+        currentPoint = nextPoint;
+    } while (nextPoint.getY() != setOfPoints[0].getY() || nextPoint.getX() != setOfPoints[0].getX());
+
+
+    return convexHull;
+}
+
 
 /*
  * description: determine if two points have the same x and y values
@@ -496,7 +566,7 @@ void drawConvex(SDL_Plotter &g, vector<point> convexHull, vector<point> allPoint
     // draw the rest of the points
     plotPoints(g, allPoints);
     g.update();
-    //g.Sleep(1000);
+    g.Sleep(1000);
 }
 
 
