@@ -136,15 +136,15 @@ double bruteForceClosestPair(SDL_Plotter &g, vector<point> setOfPoints){
 
                     //start and end points for the line
                     point start(setOfPoints[i].getX(),
-                            setOfPoints[i].getY());
+                                setOfPoints[i].getY());
                     point end(setOfPoints[j].getX(),
-                            setOfPoints[j].getY());
+                              setOfPoints[j].getY());
 
                     //line for current
                     line currentClosestPair(start, end);
 
                     //color for the line
-                    currentClosestPair.setColor(setOfPoints[j].getColor());
+                    currentClosestPair.setColor(color);
                     currentClosestPair.draw(g);
 
                     //change to false to check other point distances
@@ -222,15 +222,15 @@ double divideAndConquerClosestPair(SDL_Plotter &g, vector<point> setOfPoints,
     if(setOfPoints.size() == 2){
         //store the two points in a pair
         closest.first = point(setOfPoints[0].getX(),
-                           setOfPoints[0].getY());
+                              setOfPoints[0].getY());
         closest.second = point(setOfPoints[1].getX(),
-                            setOfPoints[1].getY());
+                               setOfPoints[1].getY());
 
         return calcDistance(setOfPoints[0], setOfPoints[1]);
     }
 
-    //if set has three points then D&C won't work, since it
-    //will split into set of 1 point which will then return 0 (special case)
+        //if set has three points then D&C won't work, since it
+        //will split into set of 1 point which will then return 0 (special case)
     else if(setOfPoints.size() == 3){
         //use brute force method to handle this case
         double minDistance = DBL_MAX;
@@ -254,9 +254,9 @@ double divideAndConquerClosestPair(SDL_Plotter &g, vector<point> setOfPoints,
 
                         //store the point pair
                         closest.first = point(setOfPoints[i].getX(),
-                                           setOfPoints[i].getY());
+                                              setOfPoints[i].getY());
                         closest.second = point(setOfPoints[j].getX(),
-                                            setOfPoints[j].getY());
+                                               setOfPoints[j].getY());
                     }
 
                     //current distance is less than min distance then update min distance
@@ -266,9 +266,9 @@ double divideAndConquerClosestPair(SDL_Plotter &g, vector<point> setOfPoints,
 
                         //store point pair
                         closest.first = point(setOfPoints[i].getX(),
-                                           setOfPoints[i].getY());
+                                              setOfPoints[i].getY());
                         closest.second = point(setOfPoints[j].getX(),
-                                            setOfPoints[j].getY());
+                                               setOfPoints[j].getY());
                     }
 
                     //current closest pair.
@@ -374,7 +374,7 @@ double divideAndConquerClosestPair(SDL_Plotter &g, vector<point> setOfPoints,
         //the current min distance then calculate the new
         //min distance
         for(int j = i + 1; j < dividedPoints.size() &&
-        dividedPoints[j].getY() - dividedPoints[i].getY() <= minDistance; j++) {
+                           dividedPoints[j].getY() - dividedPoints[i].getY() <= minDistance; j++) {
 
             if (calcDistance(dividedPoints[i], dividedPoints[j]) < minDistance) {
 
