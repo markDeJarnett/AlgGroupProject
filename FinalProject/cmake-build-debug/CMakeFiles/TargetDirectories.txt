@@ -1,0 +1,3 @@
+C:/Users/skinnere/Downloads/AlgProject-master/AlgProject-master/FinalProject/cmake-build-debug/CMakeFiles/FinalProject.dir
+C:/Users/skinnere/Downloads/AlgProject-master/AlgProject-master/FinalProject/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/skinnere/Downloads/AlgProject-master/AlgProject-master/FinalProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
