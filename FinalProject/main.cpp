@@ -41,19 +41,6 @@ int main(int argc, char* argv[]){
     int adjustYAxis = ROW_MAX-(MARGIN+1)*2;
     int adjustXAxis = COL_MAX-(MARGIN+1)*2;
 
-    //check the parameters(0: exe name, 1: number of points)
-    if(argc != 2){
-        cout << "Please enter the number of points." << endl;
-    }
-
-    //user can enter the number of points
-    int numOfPts = atoi(argv[1]);
-
-    while(numOfPts < 3 || numOfPts > 1000){
-        cout << "Please enter a number between 3 and 1000." << endl;
-        cin >> numOfPts;
-    }
-
     //while not quit
     while (!g.getQuit()) {
         //based on key entered
@@ -64,7 +51,7 @@ int main(int argc, char* argv[]){
             srand(time(NULL));
 
             //randomize the points (30 currently for testing)
-            for(int i = 0; i < numOfPts; i++) {
+            for(int i = 0; i < 50; i++) {
                 int maxPtY = (rand() % adjustYAxis) + MARGIN;
                 int maxPtX = (rand() % adjustXAxis) + MARGIN;
 
