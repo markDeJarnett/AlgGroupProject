@@ -5,7 +5,7 @@
 * Assignment Description: This program implements
 *         the closet pair functions. The  two ways are
 *         brute force and divide & conquer.
-* Due Date: 4/5/2019
+*  Due Date: 5/5/2019
 * Date Created: 3/18/2019
 * Date Last Modified: 3/24/2019
 */

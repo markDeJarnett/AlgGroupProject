@@ -5,7 +5,7 @@
 * Assignment Description: This program implements
 *         the convex hull functions. The  two ways are
 *         brute force and divide & conquer.
-* Due Date: 4/5/2019
+* Due Date: 5/5/2019
 * Date Created: 3/18/2019
 * Date Last Modified: 3/22/2019
 */
@@ -18,6 +18,9 @@
 #include <algorithm>
 
 #include "point.h"
+
+//constants (dimensions)
+const int ROW_MAXIMUM = 500;
 
 /*
  * description: finds the points belonging to the convex hull of a given set
@@ -322,19 +325,19 @@ vector<point> divideAndConquerConvexHull(SDL_Plotter &g, vector<point> setOfPoin
             int tempX = (int)round(getX(line2, leftEdge.at(i).getY()));
 
             if ((tempX > leftEdge.at(i).getX()
-                    || ((int)round(getY(line2, leftEdge.at(i).getX())) > leftEdge.at(i).getY()
-                        && (int)round(getY(line3, leftEdge.at(i).getX())) > leftEdge.at(i).getY()
-                        && leftEdge.at(i).getY() < line2.getP1().getY()
-                        && leftEdge.at(i).getY() < line2.getP2().getY()
-                        && leftEdge.at(i).getY() < line3.getP1().getY()
-                        && leftEdge.at(i).getY() < line3.getP2().getY())
-                    || ((int)round(getY(line2, leftEdge.at(i).getX())) < leftEdge.at(i).getY()
-                        && (int)round(getY(line3, leftEdge.at(i).getX())) < leftEdge.at(i).getY()
-                        && leftEdge.at(i).getY() > line2.getP1().getY()
-                        && leftEdge.at(i).getY() > line2.getP2().getY()
-                        && leftEdge.at(i).getY() < line3.getP1().getY()
-                        && leftEdge.at(i).getY() < line3.getP2().getY()))
-                    && leftCount != lCount){
+                 || ((int)round(getY(line2, leftEdge.at(i).getX())) > leftEdge.at(i).getY()
+                     && (int)round(getY(line3, leftEdge.at(i).getX())) > leftEdge.at(i).getY()
+                     && leftEdge.at(i).getY() < line2.getP1().getY()
+                     && leftEdge.at(i).getY() < line2.getP2().getY()
+                     && leftEdge.at(i).getY() < line3.getP1().getY()
+                     && leftEdge.at(i).getY() < line3.getP2().getY())
+                 || ((int)round(getY(line2, leftEdge.at(i).getX())) < leftEdge.at(i).getY()
+                     && (int)round(getY(line3, leftEdge.at(i).getX())) < leftEdge.at(i).getY()
+                     && leftEdge.at(i).getY() > line2.getP1().getY()
+                     && leftEdge.at(i).getY() > line2.getP2().getY()
+                     && leftEdge.at(i).getY() < line3.getP1().getY()
+                     && leftEdge.at(i).getY() < line3.getP2().getY()))
+                && leftCount != lCount){
                 convexHull.push_back(leftEdge.at(i));
             }
         }
@@ -348,18 +351,18 @@ vector<point> divideAndConquerConvexHull(SDL_Plotter &g, vector<point> setOfPoin
             int d = (int)round(getY(line3, rightEdge.at(i).getX()));
 
             if ((temp1X < rightEdge.at(i).getX()
-                || ((int)round(getY(line2, rightEdge.at(i).getX())) > rightEdge.at(i).getY()
-                    && (int)round(getY(line3, rightEdge.at(i).getX())) > rightEdge.at(i).getY()
-                    && rightEdge.at(i).getY() < line2.getP1().getY()
-                    && rightEdge.at(i).getY() < line2.getP2().getY()
-                    && rightEdge.at(i).getY() < line3.getP1().getY()
-                    && rightEdge.at(i).getY() < line3.getP2().getY())
-                || ((int)round(getY(line2, rightEdge.at(i).getX())) < rightEdge.at(i).getY()
-                    && (int)round(getY(line3, rightEdge.at(i).getX())) < rightEdge.at(i).getY()
-                    && rightEdge.at(i).getY() > line2.getP1().getY()
-                    && rightEdge.at(i).getY() > line2.getP2().getY()
-                    && rightEdge.at(i).getY() > line3.getP1().getY()
-                    && rightEdge.at(i).getY() > line3.getP2().getY()))
+                 || ((int)round(getY(line2, rightEdge.at(i).getX())) > rightEdge.at(i).getY()
+                     && (int)round(getY(line3, rightEdge.at(i).getX())) > rightEdge.at(i).getY()
+                     && rightEdge.at(i).getY() < line2.getP1().getY()
+                     && rightEdge.at(i).getY() < line2.getP2().getY()
+                     && rightEdge.at(i).getY() < line3.getP1().getY()
+                     && rightEdge.at(i).getY() < line3.getP2().getY())
+                 || ((int)round(getY(line2, rightEdge.at(i).getX())) < rightEdge.at(i).getY()
+                     && (int)round(getY(line3, rightEdge.at(i).getX())) < rightEdge.at(i).getY()
+                     && rightEdge.at(i).getY() > line2.getP1().getY()
+                     && rightEdge.at(i).getY() > line2.getP2().getY()
+                     && rightEdge.at(i).getY() > line3.getP1().getY()
+                     && rightEdge.at(i).getY() > line3.getP2().getY()))
                 && rightCount != rCount){
                 convexHull.push_back(rightEdge.at(i));
             }
@@ -396,7 +399,7 @@ vector<point> bruteForceConvexHull(SDL_Plotter &g, vector<point> setOfPoints) {
     bool isEdge = false;
     int num;
     int countL,
-        countR;
+            countR;
 
     g.clear();
     plotPoints(g, setOfPoints);
@@ -416,7 +419,7 @@ vector<point> bruteForceConvexHull(SDL_Plotter &g, vector<point> setOfPoints) {
         for (int i = 0; i < setOfPoints.size() && !isEdge; i++) {
             isEdge = false;
             if (!(currentPoint.getY() == setOfPoints[i].getY() && currentPoint.getX() == setOfPoints[i].getX())
-                    && !(previousPoint.getY() == setOfPoints[i].getY() && previousPoint.getX() == setOfPoints[i].getX())) {
+                && !(previousPoint.getY() == setOfPoints[i].getY() && previousPoint.getX() == setOfPoints[i].getX())) {
                 l = line(currentPoint, setOfPoints[i]);
 
                 g.clear();
@@ -428,8 +431,8 @@ vector<point> bruteForceConvexHull(SDL_Plotter &g, vector<point> setOfPoints) {
                 countL = countR = 0;
                 for (int j = 0; j < setOfPoints.size(); j++) {
                     num = (setOfPoints[j].getX() - l.getP1().getX())
-                            * (l.getP2().getY() - l.getP1().getY())
-                            - (setOfPoints[j].getY() - l.getP1().getY())
+                          * (l.getP2().getY() - l.getP1().getY())
+                          - (setOfPoints[j].getY() - l.getP1().getY())
                             * (l.getP2().getX() - l.getP1().getX());
 
                     if (num >= 0) {
@@ -568,7 +571,5 @@ void drawConvex(SDL_Plotter &g, vector<point> convexHull, vector<point> allPoint
     g.update();
     g.Sleep(1000);
 }
-
-
 
 #endif //FINALPROJECT_CONVEXHULL_H
