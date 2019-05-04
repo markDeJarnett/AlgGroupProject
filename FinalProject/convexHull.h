@@ -397,6 +397,7 @@ vector<point> bruteForceConvexHull(SDL_Plotter &g, vector<point> setOfPoints) {
     point previousPoint = point(-1,-1);
     line l;
     bool isEdge = false;
+    bool isInSet;
     int num;
     int countL,
             countR;
