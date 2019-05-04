@@ -347,7 +347,7 @@ double divideAndConquerClosestPair(SDL_Plotter &g, vector<point> setOfPoints,
     g.update();
 
     //freeze
-    g.Sleep(2000);
+    g.Sleep(500);
 
     //handle is closest pair seperated by median
     //to hold possible points that could have a min distance but are split
