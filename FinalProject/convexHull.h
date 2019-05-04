@@ -407,10 +407,6 @@ vector<point> bruteForceConvexHull(SDL_Plotter &g, vector<point> setOfPoints) {
     g.Sleep(300);
 
     sort(setOfPoints.begin(), setOfPoints.end(), compareXValues);
-    point topMost = setOfPoints[0];
-    point bottomMost = setOfPoints[setOfPoints.size()-1];
-
-    sort(setOfPoints.begin(), setOfPoints.end(), compareXValues);
 
     convexHull.push_back(setOfPoints[0]);
     currentPoint = setOfPoints[0];
@@ -418,8 +414,16 @@ vector<point> bruteForceConvexHull(SDL_Plotter &g, vector<point> setOfPoints) {
     do {
         for (int i = 0; i < setOfPoints.size() && !isEdge; i++) {
             isEdge = false;
+
+            isInSet = true;
+            for (int j = 0; j < convexHull.size(); j++) {
+                if (convexHull[j].getY() == setOfPoints[i].getY() && convexHull[j].getX() == setOfPoints[i].getX()) {
+                    isInSet = false;
+                }
+            }
+
             if (!(currentPoint.getY() == setOfPoints[i].getY() && currentPoint.getX() == setOfPoints[i].getX())
-                && !(previousPoint.getY() == setOfPoints[i].getY() && previousPoint.getX() == setOfPoints[i].getX())) {
+                    && isInSet) {
                 l = line(currentPoint, setOfPoints[i]);
 
                 g.clear();
@@ -431,8 +435,8 @@ vector<point> bruteForceConvexHull(SDL_Plotter &g, vector<point> setOfPoints) {
                 countL = countR = 0;
                 for (int j = 0; j < setOfPoints.size(); j++) {
                     num = (setOfPoints[j].getX() - l.getP1().getX())
-                          * (l.getP2().getY() - l.getP1().getY())
-                          - (setOfPoints[j].getY() - l.getP1().getY())
+                            * (l.getP2().getY() - l.getP1().getY())
+                            - (setOfPoints[j].getY() - l.getP1().getY())
                             * (l.getP2().getX() - l.getP1().getX());
 
                     if (num >= 0) {
@@ -448,6 +452,18 @@ vector<point> bruteForceConvexHull(SDL_Plotter &g, vector<point> setOfPoints) {
                     isEdge = true;
                 }
             }
+        }
+
+        if (!isEdge) {
+            l = line(currentPoint, setOfPoints[0]);
+
+            g.clear();
+            plotPoints(g, setOfPoints);
+            l.draw(g);
+            g.update();
+            //g.Sleep(300);
+
+            nextPoint = setOfPoints[0];
         }
 
         isEdge = false;
