@@ -104,7 +104,7 @@ double bruteForceClosestPair(SDL_Plotter &g, vector<point> setOfPoints){
         g.update();
 
         //freeze so it doesn't go too fast
-        g.Sleep(2000);
+        g.Sleep(300);
 
         //go through next adjacent point
         for(int j = i + 1; j < setOfPoints.size(); j++){
@@ -153,7 +153,7 @@ double bruteForceClosestPair(SDL_Plotter &g, vector<point> setOfPoints){
                     g.update();
 
                     //freeze so it doesn't go too fast
-                    g.Sleep(1000);
+                    g.Sleep(300);
                 }
             }
         }
