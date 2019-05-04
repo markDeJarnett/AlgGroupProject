@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.10.3)
+cmake_minimum_required(VERSION 3.13)
 project(FinalProject)
 
 set(CMAKE_CXX_STANDARD 11)
-
+set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake-build-debug)
 
 find_package(SDL2 REQUIRED)
